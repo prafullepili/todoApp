@@ -138,6 +138,7 @@ h2 {
 
 
 .no-todos-container {
+  height: 350px;
   width: 300px;
   margin: 30px auto;
 }

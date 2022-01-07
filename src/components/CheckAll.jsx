@@ -4,11 +4,13 @@ export default function CheckAll(props) {
   return (
     <div className="check-all-container">
       <div>
-        <div className="button" onClick={props.completeAllTodos}>
-          Check All
+        <div className="button" onClick={props.check_all}>
+          {props.checkUncheck ? 'Uncheck all' : 'Check all'}
         </div>
       </div>
-      <span>{props.remaining} items remaining</span>
+      <span>
+        {props.remaining} item{props.remaining > 1 && 's'} left
+      </span>
     </div>
   );
 }

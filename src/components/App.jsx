@@ -11,6 +11,7 @@ export default function App() {
   const [todoInput, setTodoInput] = useState('');
   const [idForTodo, setIdForTodo] = useState(4);
   const [todos, setTodos] = useState([]);
+  const [checkUncheck, setcheckUncheck] = useState(false);
 
   function addTodo(event) {
     event.preventDefault();
@@ -38,12 +39,12 @@ export default function App() {
     setTodos([...todos].filter(todo => !todo.isComplete));
   }
 
-  function completeAllTodos() {
+  function check_all() {
     const updatedTodos = todos.map(todo => {
-      todo.isComplete = true;
+      todo.isComplete = checkUncheck ? false : true;
       return todo;
     });
-
+    setcheckUncheck(preVal => !preVal);
     setTodos(updatedTodos);
   }
 
@@ -140,7 +141,6 @@ export default function App() {
             updateTodo={updateTodo}
             cancelEdit={cancelEdit}
             deleteTodo={deleteTodo}
-            completeAllTodos={completeAllTodos}
             todosFiltered={todosFiltered}
           />
         )}
@@ -148,7 +148,8 @@ export default function App() {
         {todos.length !== 0 && (
           <CheckAll
             remaining={remaining()}
-            completeAllTodos={completeAllTodos}
+            check_all={check_all}
+            checkUncheck={checkUncheck}
           />
         )}
 
