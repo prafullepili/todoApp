@@ -11,7 +11,9 @@ export default function OtherFeature(props) {
         <button className="button filter-button">Completed</button>
       </div>
       <div>
-        <button className="button">Clear completed</button>
+        <button className="button" onClick={props.clearCompleted}>
+          Clear completed
+        </button>
       </div>
     </div>
   );

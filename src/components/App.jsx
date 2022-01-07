@@ -13,7 +13,6 @@ export default function App() {
   const [todos, setTodos] = useState([]);
 
   function addTodo(event) {
-    console.log(event);
     event.preventDefault();
     if (todoInput.trim().length === 0) {
       return;
@@ -29,6 +28,33 @@ export default function App() {
     ]);
     setTodoInput('');
     setIdForTodo(prevIdForTodo => prevIdForTodo + 1);
+  }
+
+  function remaining() {
+    return todos.filter(todo => !todo.isComplete).length;
+  }
+
+  function clearCompleted() {
+    setTodos([...todos].filter(todo => !todo.isComplete));
+  }
+
+  function completeAllTodos() {
+    const updatedTodos = todos.map(todo => {
+      todo.isComplete = true;
+      return todo;
+    });
+
+    setTodos(updatedTodos);
+  }
+
+  function todosFiltered(filter) {
+    if (filter === 'all') {
+      return todos;
+    } else if (filter === 'active') {
+      return todos.filter(todo => !todo.isComplete);
+    } else if (filter === 'complete') {
+      return todos.filter(todo => todo.isComplete);
+    }
   }
 
   function deleteTodo(id) {
@@ -99,13 +125,11 @@ export default function App() {
     <div className="todo-app-container">
       <div className="todo-app">
         <h2>Todo App</h2>
-
         <TodoForm
           addTodo={addTodo}
           setTodoInput={setTodoInput}
           todoInput={todoInput}
         />
-
         {todos.length === 0 ? (
           <NoTodos />
         ) : (
@@ -116,14 +140,20 @@ export default function App() {
             updateTodo={updateTodo}
             cancelEdit={cancelEdit}
             deleteTodo={deleteTodo}
+            completeAllTodos={completeAllTodos}
+            todosFiltered={todosFiltered}
           />
         )}
 
-        {/* Check all container start */}
-        {todos.length !== 0 && <CheckAll />}
+        {todos.length !== 0 && (
+          <CheckAll
+            remaining={remaining()}
+            completeAllTodos={completeAllTodos}
+          />
+        )}
 
         {/* All Active Completed btn start */}
-        {todos.length !== 0 && <OtherFeature />}
+        {todos.length !== 0 && <OtherFeature clearCompleted={clearCompleted} />}
       </div>
     </div>
   );
