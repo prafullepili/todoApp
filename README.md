@@ -11,4 +11,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.Ru
 Runs the app in the development mode
 
 Note: if you got error " 'react-scripts' is not recognized as an internal or external command, operable program or batch file."
+<<<<<<< HEAD
       then install react using "npm install react" and try again "npm start" command
+=======
+      then install react using "npm install react"
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+>>>>>>> parent of 8e4a5e6 (Small changes in readme file)
